@@ -2,17 +2,15 @@
 
     {% block content %}
     
-    <h1>Build A Blog</h1>   
+    <h1><center>Build A Blog</center></h1>   
 
-    {% if blogs|length == 0 %}
-    <p>No blog entries yet!</p>
-    {% else %}
+
         {% for blog in blogs %}
         <h1> <a href="/blog?id={{blog.id}}">{{blog.title}}</a> </h1>
         <p>  {{blog.entry}} </p>
         <hr />
         {% endfor %}
-    {% endif %}
+    
 
 {% endblock %}
 

@@ -32,6 +32,7 @@ def index():
     title_error = ""
     entry_error = ""
     entry_id = ""
+    newpost_id = ""
     
     if request.method == 'POST':
         title = request.form['title']
@@ -46,13 +47,16 @@ def index():
             new_entry = Blog(title, entry)
             db.session.add(new_entry)
             db.session.commit()
+            newpost_id = new_entry.id
         else:
             return render_template('newpost.html', title=title, entry=entry, title_error=title_error, entry_error=entry_error)
     
     entry_id = request.args.get('id')
     
     if entry_id:
-        blogs = Blog.query.all()
+        blogs = Blog.query.filter_by(id=entry_id)
+    elif newpost_id:
+        blogs = Blog.query.filter_by(id=newpost_id)
     else:
         blogs = Blog.query.all()
 

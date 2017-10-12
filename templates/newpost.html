@@ -2,17 +2,41 @@
 
     {% block content %}
 
-<form action='/blog' method='post'>
-        <label>Title for your new blog:
-            <input name='title' type='text' value="{{title}}" />
-        </label>
-        {{title_error}}
-        <label>Your new blog entry:
-            <input name='entry' type='text' value="{{entry}}" />
-        </label>
-        {{entry_error}}
-        <input type='submit' value='Add Entry' />
-    </form>
+    <style type="text/css">
+            .error {
+                color: red;
+            }
+            .body {
+                width: 200px;
+                height: 200px;
+            }
+            .title {
+                width: 200px;
+            }
+    </style>
 
+<h1><center>Add a Blog Entry</center></h1>
+
+<form action='/blog' method='post'>
+        <table>
+            <tr>
+                <td><label for="title">Title for your new blog:</label><td>
+            </tr>
+            <tr>
+                <td><input class="title" name='title' type='text' value="{{title}}" /></td>
+                <td class="error">{{title_error}}</td>
+            </tr>
+            <tr>
+                <td><label for="entry">Your new blog entry:</label></td>
+            </tr>
+            <tr>
+                <td><input class="body" name='entry' type='text' value="{{entry}}" /></td>
+                <td class="error">{{entry_error}}</td>
+            </tr>
+            <tr>
+                <td><input type='submit' value='Add Entry' /></td>
+            </tr>
+        </table>
+    </form>
     <hr />
 {% endblock %}
