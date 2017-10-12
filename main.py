@@ -20,24 +20,58 @@ class Blog(db.Model):
         self.entry = entry
         #self.owner = owner
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
+def redirect_to_blog():
+        return redirect('/blog')
+
+@app.route('/blog', methods=['POST', 'GET'])
 def index():
-
     #owner = User.query.filter_by(email=session['email']).first()
-
+    title = ""
+    entry = ""
+    title_error = ""
+    entry_error = ""
+    entry_id = ""
+    
     if request.method == 'POST':
         title = request.form['title']
         entry = request.form['entry']
-        new_entry = Blog(title, entry)
-        db.session.add(new_entry)
-        db.session.commit()
-
-    blogs = Blog.query.all()
-
+        
+        if title == "":
+            title_error = "Please enter a title!"
+        if entry == "":
+            entry_error = "Please enter a body!"
+            
+        if title and entry:
+            new_entry = Blog(title, entry)
+            db.session.add(new_entry)
+            db.session.commit()
+        else:
+            return render_template('newpost.html', title=title, entry=entry, title_error=title_error, entry_error=entry_error)
+    
+    entry_id = request.args.get('id')
+    
+    if entry_id:
+        blogs = Blog.query.all()
+    else:
+        blogs = Blog.query.all()
 
     #tasks = Task.query.filter_by(completed=False,owner=owner).all()
     #completed_tasks = Task.query.filter_by(completed=True,owner=owner).all()
     return render_template('blog.html', website_title="Super Awesome Blog", blogs=blogs)
+
+@app.route('/blog_entry', methods=['POST', 'GET'])
+def create_entry():
+
+
+
+    return render_template('blog-entry.html', title=title, entry=entry)
+
+@app.route('/newpost')
+def write_a_entry():
+    return render_template('newpost.html')
+
+
 
 if __name__ == '__main__':
     app.run()
