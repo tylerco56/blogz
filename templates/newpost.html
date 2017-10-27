@@ -17,7 +17,7 @@
 
 <h1><center>Add a Blog Entry</center></h1>
 
-<form action='/blog' method='post'>
+<form action='/add' method='post'>
         <table>
             <tr>
                 <td><label for="title">Title for your new blog:</label><td>
@@ -30,7 +30,7 @@
                 <td><label for="entry">Your new blog entry:</label></td>
             </tr>
             <tr>
-                <td><input class="body" name='entry' type='text' value="{{entry}}" /></td>
+                <td><textarea class="body" name='entry' type='text' value="{{entry}}"> </textarea></td>
                 <td class="error">{{entry_error}}</td>
             </tr>
             <tr>

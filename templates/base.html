@@ -10,10 +10,20 @@
                 padding-right: 15px;
             }
     </style>
-    <a href="/">Main Blog Page </a>
-    <a href="/newpost">Add an Blog Entry</a><br />
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+    <a href="/blog">Blogs</a>
+    <a href="/add">Add an Blog Entry</a>
+    <a href="/logout">Logout</a><br />
     </head>
     <body>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    <ul>                                <!--# ^will allow the category to enable templetes for differnet info warnings-->
+    {% for category,message in messages %}
+        <li class="{{category}}">{{message}}</li>
+    {% endfor %}
+    </ul>
+    {% endwith %}
         
 
 

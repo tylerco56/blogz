@@ -2,15 +2,22 @@
 
     {% block content %}
     
-    <h1><center>Build A Blog</center></h1>   
+  <h1><center>Blogz</center></h1>   
 
 
-        {% for blog in blogs %}
-        <h1> <a href="/blog?id={{blog.id}}">{{blog.title}}</a> </h1>
-        <p>  {{blog.entry}} </p>
+    {% if display_one %}
+        <h1> <a href="/blog?id={{display_one.id}}">{{display_one.title}}</a> </h1>
+        <p>  {{display_one.entry}} </p>
+        written by: <a href="/blog?oid={{display_one.user.id}}">{{display_one.user.username}}
+        <hr />
+    {% else %}
+        {% for post in content %}
+        <h1> <a href="/blog?id={{post.id}}">{{post.title}}</a> </h1>
+        <p>  {{post.entry}} </p>
+        written by: <a href="/blog?oid={{post.user.id}}">{{post.user.username}}</a>
         <hr />
         {% endfor %}
-    
+    {% endif %}
 
 {% endblock %}
 
